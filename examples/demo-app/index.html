@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E2E Demo App</title>
+    <style>
+      :root { color-scheme: light; font-family: system-ui, sans-serif; }
+      body { margin: 0; background: #f3f6f4; color: #17251d; }
+      main { max-width: 42rem; margin: 4rem auto; padding: 2rem; background: white; border-radius: 1rem; box-shadow: 0 1rem 3rem #17251d12; }
+      form { display: flex; gap: .75rem; margin: 1.5rem 0; }
+      input { flex: 1; padding: .75rem; border: 1px solid #9aa99f; border-radius: .5rem; font: inherit; }
+      button { padding: .75rem 1rem; border: 0; border-radius: .5rem; background: #16734b; color: white; font: inherit; cursor: pointer; }
+      li { padding: .5rem 0; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>E2E Demo App</h1>
+      <p>A tiny local web target for verifying the Playwright setup.</p>
+      <form id="task-form">
+        <label for="task-input">New task</label>
+        <input id="task-input" name="task" autocomplete="off" required />
+        <button type="submit">Add task</button>
+      </form>
+      <ul aria-label="Tasks" id="task-list"></ul>
+    </main>
+    <script>
+      const form = document.querySelector('#task-form');
+      const input = document.querySelector('#task-input');
+      const list = document.querySelector('#task-list');
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const value = input.value.trim();
+        if (!value) return;
+
+        const item = document.createElement('li');
+        item.textContent = value;
+        list.append(item);
+        form.reset();
+        input.focus();
+      });
+    </script>
+  </body>
+</html>
